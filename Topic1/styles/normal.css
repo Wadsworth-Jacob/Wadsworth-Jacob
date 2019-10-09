@@ -1,0 +1,59 @@
+p {
+    width: 500px;
+    color: black;
+}
+
+.tPic{
+    width: 200px;
+}
+
+.cdePic {
+    width: 500px;
+}
+
+.calc {
+    border-style: double;
+    border-color: green;
+    height: 20px;
+    width: 115px;
+    display: flex;
+    background-color: rgb(124, 186, 223);
+    color: rgb(110, 129, 3);
+    padding-bottom: 0px;
+    margin-bottom: 5px;
+    height: 35px;
+    font-size: 24px;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+.calc2{
+   
+    border-style: double;
+    border-color: green;
+    height: 20px;
+    width: 75px;
+    display: none;
+}
+
+.calc3{
+    border-style: double;
+    border-color: green;
+    height: 40px;
+    width: 150px;
+}
+
+.webCalc{
+    width:35px;
+    height:35px;
+}
+
+.clear{
+    width:152px;
+    height:25px;
+}
+
+#addItUp{
+    height: 40px;
+    width: 150px; 
+}
