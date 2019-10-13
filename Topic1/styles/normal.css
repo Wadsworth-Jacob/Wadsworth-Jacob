@@ -1,5 +1,5 @@
 .cdePrgrph {
-    width: 500px;
+    width: 800px;
     color: black;
 }
 
@@ -8,7 +8,7 @@
 }
 
 .cdePic {
-    width: 500px;
+    width: 800px;
 }
 
 .calc {
@@ -56,4 +56,9 @@
 #addItUp{
     height: 40px;
     width: 150px; 
+}
+
+.parkPic{
+    max-width:800px;
+    max-height:300px;
 }
