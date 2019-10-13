@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="Wadsworth-Jacob/Topic1/styles/normal.css">
+<body>
+<h1><i>Topic 3</i></h1>
+
+<h2><i><u>JSON.stringify and JSON.parse</u></i></h2>
+
+<p class="cdePrgrph">
+    JSON is commonly used to exchange data between webservers.  When such information is sent the JSON.stringify() method converts
+    the data to a string in order to prep the data to be sent to another server.  The code below represents an array of temple objects,
+    which are similar to those created in topic two, and will be converted to a string using JSON.stringify(). 
+</p><br>
+
+<img class="cdePic" src="Wadsworth-Jacob/Topic3/images/templeJSON.PNG"><br>
+
+<p class="cdePrgrph">
+    The next line of code will stringify the array and display in the div below.
+</p><br>
+
+<img class="cdePic" src="Wadsworth-Jacob/Topic3/images/templeStringify.PNG"><br>
+
+
+<h3><i>JSON Data Stringified</i></h3>
+<div id='templeStringDiv' class="cdePrgrph"> </div><br>
+
+<h3><i>JSON Data Parsed</i></h3>
+
+<p class="cdePrgrph">
+    Once a person calls JSON data from another webserver, if the data is written in JSON format, then the user can convert the JSON string
+    into a JavaScript object.  The next set of code will parse the above string back into an array of objects and then run a loop to display
+    the objects and their information below.
+</p><br>
+
+<img class="cdePic" src="Wadsworth-Jacob/Topic3/images/templeParse.PNG"><br><br>
+
+<h2><b><u>Arizona Temples</u></b></h2><br>
+
+
+
+<div id="templeParseDiv"></div>
+
+
+
+
+
+</body>
+<script>
+
+var temple = [ 
+               {
+                   name: 'Mesa',
+                   address: "101 S Lesueur, Mesa, AZ 85204",
+                   dateOpened: "October 23, 1927"
+               },
+               {
+                   name: 'Gilbert',
+                   address: "3301 S Greenfield Rd, Gilbert, AZ 85297",
+                   dateOpened: "March 2, 2014"
+               },
+               {
+                   name: 'Phoenix',
+                   address: "5220 W Pinnacle Peak Rd, Glendale, AZ 85310" ,
+                   dateOpened: "November 16, 2014"
+               },
+               {
+                   name: 'Gila Valley',
+                   address: "5291 US-70, Thatcher, AZ 85552" ,
+                   dateOpened: "April 23, 2010"
+               },
+               {
+                   name: 'Snow Flake',
+                   address: "1875 Canyon Dr, Snowflake, AZ 85937" ,
+                   dateOpened: "February 2002"
+               }
+
+]
+
+var templeString = JSON.stringify(temple);
+document.getElementById('templeStringDiv').innerHTML = templeString;
+
+
+var templeParse = JSON.parse(templeString);
+
+
+var finalTxt='';
+        for (var i = 0; i<templeParse.length; i++){
+            finalTxt += '<b><u>' + templeParse[i].name + ' Temple' + '</u></b><br>' +
+                        '<b>Address: </b>' + templeParse[i].address + '<br>' +
+                        '<b>Date Opened: </b> ' + templeParse[i].dateOpened +'<br><br>';
+        }
+        document.getElementById('templeParseDiv').innerHTML = finalTxt; 
+
+
+
+
+</script>
+</html>
