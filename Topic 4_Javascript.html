@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="Wadsworth-Jacob/Topic1/styles/normal.css">
+<link rel="stylesheet" href="Topic1/styles/normal.css">
 <body onload="crtStSlctr()">
 <h1><i>Topic 4</i></h1>
 <h2><i><u>XML Request to Consume JSON data</u></i></h2>
@@ -13,14 +13,14 @@
     state that the user would like to have displayed.  The function that makes the call and then displays it 
     for the user to see is assigned to a button.  The first portion creates the new request and is as follows;
 </p><br>
-<img src="Wadsworth-Jacob/Topic4/images/jsonCall1.PNG" class='cdePic' alt='Code Picture'><br>
+<img src="Topic4/images/jsonCall1.PNG" class='cdePic' alt='Code Picture'><br>
 <p class="cdePrgrph">
     The first line of code takes a value from the select box.  This value will be used as a filter in the JSON call, to filter for 
     a specific state.  The next line of code creates a variable for the JSON call.  This variable is called parksURL.  Next a 
     new XMLHttpRequest is created.  The parksURL variable is used in the request to retrieve the data.  A second function is then embedded
     within the first.  This second function is as follows;
 </p><br>
-<img src="Wadsworth-Jacob/Topic4/images/jsonCall2.PNG" class='cdePic' alt='Code Picture'><br>
+<img src="Topic4/images/jsonCall2.PNG" class='cdePic' alt='Code Picture'><br>
 <p class="cdePrgrph">
     This next function parses the JSON data, stores it in the console log, and then runs a loop to display the information 
     for each of the national parks within the selected state.  Note the if statement.  While creating the code I realized that
