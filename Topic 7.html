@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="Topic1/styles/normal.css">
+<body id='bdy' >
+<h1><i>Topic 7</i></h1>
+<h2><i><u>Manipulating CSS Properties with Javascript </u></i></h2>
+
+<p class="cdePrgrph javaChange" id="test">
+   This code will use javascript to manipulate the CSS class properites of the items below.  Press the buttons to make changes 
+   to the buttons properties.
+
+</p>
+<div id='click'></div>
+
+<label for='fontColor'>Font Color</label>
+<select id='fontColor' onchange='fontColor()' >
+    <option value='black'>Black</option>    
+    <option value='blue'>Blue</option>
+    <option value='green'>Green</option>
+    <option value='orange'>Orange</option>
+    <option value='purple'>Purple</option>
+    <option value='red'>Red</option>    
+    <option value='yellow'>Yellow</option>
+    <option value='white'>White</option>
+</select><br>
+<label for='bckgrndColor'>Background Color</label>
+<select id='bckgrndColor' onchange='bckgrndColor()' >
+        <option value='black'>Black</option>    
+        <option value='blue'>Blue</option>
+        <option value='green'>Green</option>
+        <option value='orange'>Orange</option>
+        <option value='purple'>Purple</option>
+        <option value='red'>Red</option>
+        
+        <option value='yellow'>Yellow</option>
+        <option value='white'>White</option>
+    </select><br>
+<label>Font Size</label>
+<button type="button" id="increase" onclick="fontIncrease()">Increase</button>
+<button type="button" id="decrease" onclick="fontDecrease()">Decrease</button>
+
+</body>
+
+<script>
+
+document.getElementById('bckgrndColor').value = 'white';
+
+function fontColor(){
+    var c = document.getElementById('fontColor').value;
+    var x = document.getElementsByClassName('javaChange');
+    for (var i = 0; i < x.length; i++){
+   
+    x[i].style.color = c;
+    
+   
+};
+};
+
+function bckgrndColor(){
+    var c = document.getElementById('bckgrndColor').value;
+    var x = document.getElementsByClassName('javaChange');
+    for (var i = 0; i < x.length; i++){
+   
+    x[i].style.backgroundColor = c;
+    
+   
+};
+};
+
+
+var b = 16;
+
+function fontIncrease(){
+    var x = document.getElementsByClassName('javaChange');
+    
+    b += 1;
+  
+document.getElementById("click").innerHTML = b;
+
+for (var i = 0; i < x.length; i++){
+    x[i].style.fontSize = b + 'px';
+};
+    
+};
+
+function fontDecrease(){
+    var x = document.getElementsByClassName('javaChange');
+    
+    b -= 1;
+  
+document.getElementById("click").innerHTML = b;
+
+for (var i = 0; i < x.length; i++){
+    x[i].style.fontSize = b + 'px';
+};
+    
+};
+       
+      
+</script>
+
+
+</html>

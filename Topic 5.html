@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="Topic1/styles/normal.css">
+<body onload="crtStSlctr()">
+<h1><i>Topic 5</i></h1>
+<h2><i><u>Storage</u></i></h2>
+
+<p cde="cdePrgrph">
+    This next set of code will apply session and local storage to the website that uses the national park services
+    API.  Now, when the user runs a search, the search information from the API will also be stored within
+    local storage.  That way, if the user leaves the website and then comes back, the website will display
+    their previous search results.  Both the select box and the div below will have the information stored.  
+    This will allow the select box to show the state that was last selected and it will show the national park
+    information for the state that was last selected.  This information is stored into local storage each time the 
+    person presses the 'View the National Parks' button and calls the functions associated with this button.
+    The code below shows the javascript that is called to store the local storage. 
+</p>
+<img class="cdePic" src="Topic5/images/localStorage1.PNG"><br>
+<img class="cdePic" src="Topic5/images/localStorage2.PNG"><br>
+
+<p class="cdePrgrph">
+    The next set of code displays this information on the onload of the webpage.  This code is embedded within 
+    a function that runs at the time the website loads, thus displaying the last search that was made when the 
+    website first opens.  This code is found at the bottom of the image below.  It occurs after all of the options 
+    for the select box have been created.
+</p>
+<img class="cdePic" src="Topic5/images/localStorageLoad.PNG"><br>
+<p class="cdePrgrph">
+    Lastly we will look at the session storage.  In this the code will display a counter for everytime that the 
+    user performs a search in a particular session.  Since the count is stored in session storage, the count 
+    starts new when a new session is oppened.  This code is also embedded within a function that is called when
+    the user presses the 'View the National Parks' button.  See this code below.
+</p>
+<img class="cdePic" src="Topic5/images/sessionStorage.PNG"><br>
+
+
+
+
+<h2><u><b>Find the National Parks in Your State</b></u></h2>
+<p class="cdePrgrph">It will take a few moments to load the data when selecting a park.</p>
+
+
+
+
+
+
+<select id="slctStates"></select><br>
+<button id='slctButton' onclick="loadInfo()">View the National Parks</button><br>
+<div class="cdePrgrph" id="searchCount"></div>
+
+<div id="nationalParks"></div>
+
+</body>
+
+<script>
+       
+       var states = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut'
+                    ,'Deleware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas'
+                    ,'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota'
+                    ,'Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey'
+                    ,'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon'
+                    ,'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas'
+                    ,'Utah', 'Vermont', 'Virginia', 'Washington', 'Washington D.C.', 'West Virginia', 'Wisconsin'
+                    ,'Wyoming'];
+       var stateCdes = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS'
+                       ,'KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','HJ','NM','NY'
+                       ,'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','DC','WV'
+                       ,'WI','WY'];
+
+        function crtStSlctr(){
+           
+           //creates the options of states that populate the select box
+            var a = document.getElementById('slctStates');
+            for (i=0; i<51; i++){
+                
+                var option = document.createElement("option");
+                option.text = states[i];
+                option.value = stateCdes[i];
+                a.add(option);
+
+            };
+
+           // localStorage.removeItem("lstPrkData");
+           // localStorage.removeItem("lstStSlctd");
+
+            //Call information for the last park that was selected
+            document.getElementById("nationalParks").innerHTML = localStorage.getItem("lstPrkData");
+            //Call information for the last state that was selected
+            document.getElementById("slctStates").value = localStorage.getItem("lstStSlctd");
+        };
+
+            function loadInfo(){
+            var cde = document.getElementById("slctStates").value;
+            //set local storage for the state that was last selected
+            localStorage.setItem("lstStSlctd", cde);
+            var parksURL = 'https://developer.nps.gov/api/v1/parks?stateCode=' 
+                          +  cde
+                          + '&fields=images&api_key=DoggIuLI6iLdqIkFcxYslNODaJVXYkoijNfvfLbB';
+          
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", parksURL, true);
+            xhttp.send();
+
+           
+
+            xhttp.onload = function () {
+            var parks = JSON.parse(xhttp.response);
+             console.log(parks);
+             var parksString = JSON.stringify(xhttp.response);
+
+            
+
+            var finalTxt = '';
+         
+            for (var i = 0; i < parks.total; i++){
+          
+             
+          if (parks.data[i].images[0] == undefined){
+              var parkPic = '';
+          } else {
+            var parkPic = '<img class="parkPic" src="' + parks.data[i].images[0].url + '" alt = "pic"><br><br>'; 
+          };
+          if (parks.data[i].directionsInfo == ""){var directions = 'No diretions included for this park.'
+          } else {
+            var directions = parks.data[i].directionsInfo;
+          };
+
+         finalTxt += '<p class="cdePrgrph"><b><u><a href="' + parks.data[i].url + '">'+ parks.data[i].fullName + '</a></u></b><br><br>'
+                   
+                   + '<b>Description: </b>' + parks.data[i].description + '<br><br>'
+                   + '<b>Directions: </b>' + directions + '<br><br></p>'
+                   + parkPic;
+        };
+
+        localStorage.setItem("lstPrkData", finalTxt);
+        document.getElementById("nationalParks").innerHTML = localStorage.getItem("lstPrkData");
+
+        //session storage count of searches performed during this session
+
+        if (sessionStorage.clickcount) {
+         sessionStorage.clickcount = Number(sessionStorage.clickcount) + 1;
+         } else {
+         sessionStorage.clickcount = 1;
+         }
+         document.getElementById("searchCount").innerHTML = "You have performed " +
+         sessionStorage.clickcount + " search(es) in this session.";
+
+    };
+
+
+};
+        
+
+
+//https://developer.nps.gov/api/v1/parks?parkCode=acad&api_key=DoggIuLI6iLdqIkFcxYslNODaJVXYkoijNfvfLbB
+
+//DoggIuLI6iLdqIkFcxYslNODaJVXYkoijNfvfLbB
+</script>
+
+
+</html>

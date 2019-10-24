@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="Topic1/styles/normal.css">
+<body id='bdy' onload='start()' onkeydown='keyDown()'>
+<h1><i>Topic 9</i></h1>
+<h2><i><u>Javascript Events</u></i></h2>
+<div id="bgn"></div>
+<select id='slct' onchange='slctit()'>
+    <option value='1'>Select 1</option>
+    <option value='2'>Select 2</option>
+</select>
+<div id='2nd'></div><br><br>
+<button id="clckIt" onclick='clckIt()'>Add Color Box</button><br>
+<button onclick='rmv()'>Remove Color Box</button><br><br>
+<h2><b>Press a Key</b></h2>
+<div id='key'></div>
+<p ontouchstart="alertTouch()">Touch this paragraph to trigger a function that will alert a message.</p>
+
+
+
+
+
+</body>
+
+<script>
+var opening = '<h2><b>Hello, Welcome to the Javascript Event Page.  This opening dialog is brought to you by "onload"</b></h2>';
+var slct1 = "This dialog is brought to you by onchange, because you changed the select box to select 1";
+var slct2 = "This dialog is brought to you by onchange, because you changed the select box to select 2";
+
+function start(){
+  document.getElementById('bgn').innerHTML = opening;
+}
+
+function slctit(){
+    var slctVal = document.getElementById('slct').value;
+    if (slctVal == '1'){
+        document.getElementById('2nd').innerHTML = slct1;
+    } else {
+        document.getElementById('2nd').innerHTML = slct2;
+    };
+};
+
+function clckIt(){
+    //creates the select box 
+    var slct = document.createElement("div");
+           
+           //inserts the select box before a break element with the id='brk'
+           var button1 = document.getElementById("clickIt");
+           var insertedNode = bdy.insertBefore(slct, button1);
+
+           //gives the new node the id 'slctStates' to be referenced when creating children of the slct box
+           insertedNode.setAttribute("id","colors");
+           document.getElementById('colors').innerHTML = 'This color box comes from onclick!!!'
+
+
+}
+
+function rmv(){
+    var elem = document.getElementById('colors');
+    elem.remove();
+}
+
+function keyDown(){
+    document.getElementById('key').innerHTML = 'YOU PRESSED A KEY DOWN #onkeydown';
+}
+
+function alertTouch(){
+    alert('Hey, that tickles.  This alert brought to you by ontouchstart');
+};
+
+
+
+       
+      
+</script>
+<style>
+    #colors{
+        color: white;
+        font-size: 20px;
+    }
+
+</style>
+
+
+</html>

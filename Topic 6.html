@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="Topic1/styles/normal.css">
+<body id='bdy' >
+<h1><i>Topic 6</i></h1>
+<h2><i><u>DOM Manipulation</u></i></h2>
+
+<p cde="cdePrgrph">
+   This builds upon a previously built web page.  For this topic the page has a button called 'Create Select List'.  When pressed
+   this button will create within the webpage the select list that is used to provide the values necessary to call the national park
+   service information for the state that is selected.  To begin, I created two arrays.  One array contains the name of each state 
+   (and Washington D.C.) and the second array contains the corresponding state abbreviation (DC for Washington D.C.).  These arrays will
+   be used to assign values and text for the options that will be included within a select tag that will be created by the code.
+</p>
+<img class="cdePic" src="Topic6/images/stateArrays.PNG"><br>
+<p cde="cdePrgrph">
+    The next lines of code will create a select tag, insert it before a break tag, and then assign it an id.  Following this, the code 
+    will append children nodes to this break tag.  The appended nodes will be options for each of the 50 states and Washington D.C. 
+    and will assign both the text of each state and the value that each option will contain.  The code will run a loop to append each
+    option and will loop through the above-mentioned arrays to ensure that each state and its corresponding value are assigned to an option.
+    Although not included within the imgage below, at the end of the function, the local storage of both the select box value and the 
+    National Park Servic information of the users previous visit will also be loaded.
+</p>
+<img class="cdePic" src="Topic6/images/slctCreation.PNG"><br>
+<p cde="cdePrgrph">
+    Finally the function will remove the button that creates the select list.  This will prevent the user from being able to create
+    more than one select box.
+</p>
+<img class="cdePic" src="Topic6/images/slctBtnRemover.PNG"><br>
+
+
+
+<p class="cdePrgrph">
+   Test the code by pressing the button below.
+</p>
+
+
+
+
+
+<h2><u><b>Find the National Parks in Your State</b></u></h2>
+<p class="cdePrgrph">It will take a few moments to load the data when selecting a park.</p>
+
+
+
+
+
+<button id='slctCrtr' type='button' onclick="crtStSlctr()">Create Select List</button>
+<br id="brk">
+<button id='slctButton' onclick="loadInfo()">View the National Parks</button><br>
+<div class="cdePrgrph" id="searchCount"></div>
+
+<div id="nationalParks"></div>
+
+</body>
+
+<script>
+       
+       var states = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut'
+                    ,'Deleware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas'
+                    ,'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota'
+                    ,'Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey'
+                    ,'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon'
+                    ,'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas'
+                    ,'Utah', 'Vermont', 'Virginia', 'Washington', 'Washington D.C.', 'West Virginia', 'Wisconsin'
+                    ,'Wyoming'];
+       var stateCdes = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS'
+                       ,'KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','HJ','NM','NY'
+                       ,'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','DC','WV'
+                       ,'WI','WY'];
+
+        function crtStSlctr(){
+           
+          
+           //creates the select box 
+           var slct = document.createElement("select");
+           
+           //inserts the select box before a break element with the id='brk'
+           var brk1 = document.getElementById("brk");
+           var insertedNode = bdy.insertBefore(slct, brk1);
+
+           //gives the new node the id 'slctStates' to be referenced when creating children of the slct box
+           insertedNode.setAttribute("id","slctStates");
+            
+           
+           //creates the options of states that populate the select box
+            var a = document.getElementById('slctStates');
+            for (i=0; i<51; i++){
+                
+                var option = document.createElement("option");
+                option.text = states[i];
+                option.value = stateCdes[i];
+                a.add(option);
+
+            };
+
+           // localStorage.removeItem("lstPrkData");
+           // localStorage.removeItem("lstStSlctd");
+
+            //Call information for the last park that was selected
+            document.getElementById("nationalParks").innerHTML = localStorage.getItem("lstPrkData");
+            //Call information for the last state that was selected
+            document.getElementById("slctStates").value = localStorage.getItem("lstStSlctd");
+            //remove the button that creates the select list so that the user will not create more than one select list
+            var elmnt = document.getElementById("slctCrtr");
+            elmnt.remove();
+        };
+    
+
+            function loadInfo(){
+            var cde = document.getElementById("slctStates").value;
+            //set local storage for the state that was last selected
+            localStorage.setItem("lstStSlctd", cde);
+            var parksURL = 'https://developer.nps.gov/api/v1/parks?stateCode=' 
+                          +  cde
+                          + '&fields=images&api_key=DoggIuLI6iLdqIkFcxYslNODaJVXYkoijNfvfLbB';
+          
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", parksURL, true);
+            xhttp.send();
+
+           
+
+            xhttp.onload = function () {
+            var parks = JSON.parse(xhttp.response);
+             console.log(parks);
+             var parksString = JSON.stringify(xhttp.response);
+
+            
+
+            var finalTxt = '';
+         
+            for (var i = 0; i < parks.total; i++){
+          
+             
+          if (parks.data[i].images[0] == undefined){
+              var parkPic = '';
+          } else {
+            var parkPic = '<img class="parkPic" src="' + parks.data[i].images[0].url + '" alt = "pic"><br><br>'; 
+          };
+          if (parks.data[i].directionsInfo == ""){var directions = 'No diretions included for this park.'
+          } else {
+            var directions = parks.data[i].directionsInfo;
+          };
+
+         finalTxt += '<p class="cdePrgrph"><b><u><a href="' + parks.data[i].url + '">'+ parks.data[i].fullName + '</a></u></b><br><br>'
+                   
+                   + '<b>Description: </b>' + parks.data[i].description + '<br><br>'
+                   + '<b>Directions: </b>' + directions + '<br><br></p>'
+                   + parkPic;
+        };
+
+        localStorage.setItem("lstPrkData", finalTxt);
+        document.getElementById("nationalParks").innerHTML = localStorage.getItem("lstPrkData");
+
+        //session storage count of searches performed during this session
+
+        if (sessionStorage.clickcount) {
+         sessionStorage.clickcount = Number(sessionStorage.clickcount) + 1;
+         } else {
+         sessionStorage.clickcount = 1;
+         }
+         document.getElementById("searchCount").innerHTML = "You have performed " +
+         sessionStorage.clickcount + " search(es) in this session.";
+
+    };
+
+
+};
+        
+
+
+//https://developer.nps.gov/api/v1/parks?parkCode=acad&api_key=DoggIuLI6iLdqIkFcxYslNODaJVXYkoijNfvfLbB
+
+//DoggIuLI6iLdqIkFcxYslNODaJVXYkoijNfvfLbB
+</script>
+
+
+</html>
