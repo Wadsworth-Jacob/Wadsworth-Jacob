@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="Topic1/styles/normal.css">
+<body id='bdy' >
+<h1><i>Topic 10</i></h1>
+<h2><i><u>Audio, Video, and Canvas Tags</u></i></h2>
+
+<h3><b><u>Elder Perry's Testimony of Joseph Smith and the Restoration</u></b></h3>
+
+      <video width="320" height="240" controls>
+        <source src="Topic10/Videos/2009-02-04-the-message-of-the-restoration-720p-eng.mp4" type="video/mp4">
+        
+      </video>
+      
+      <p><strong>Note:</strong> The video tag is not supported in Internet Explorer 8 and earlier versions.</p>
+
+<h3><b><u>Joseph Smith's First Prayer</u></b></h3>
+      <audio controls>
+        
+        <source src="Topic10/Audio/2001-01-0260-joseph-smiths-first-prayer-vocal-and-instrumental-192k-eng (1).mp3" type="audio/mpeg">
+      </audio>
+      <p>Click the play button</p>
+      
+<h3><b><u>Rotating Scriptures of the Restoration</u></b></h3>      
+      <div id='canvasHold'><canvas  id="myCanvas" width="600" height="300" style="border:1px solid #000000;"></canvas>
+      </div>
+        <button type="button" onclick="wrapText2()">Hello</button><br>
+      <div id="count"></div>
+      
+
+</body>
+
+<script>
+
+var number = 0;
+var n = 0;
+
+function runScripture () {
+  number = +number + 1;
+  if(number == 7){number = 1;}
+  n = + n + 1;
+  if(n==4){n = 0};
+document.getElementById('canvasHold').innerHTML = '';
+document.getElementById('canvasHold').innerHTML = '<canvas  id="myCanvas" width="600" height="300" style="border:1px solid #000000;"></canvas>'
+function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+    ctx.fillText("",x,y);
+    var words = text.split(' ');
+    var line = '';
+
+    for(var n = 0; n < words.length; n++) {
+      var testLine = line + words[n] + ' ';
+      var metrics = ctx.measureText(testLine);
+      var testWidth = metrics.width;
+      if (testWidth > maxWidth && n > 0) {
+        ctx.fillText(line, x, y);
+        line = words[n] + ' ';
+        y += lineHeight;
+      }
+      else {
+        line = testLine;
+      }
+    }
+    ctx.fillText(line, x, y);
+  }
+
+  var canvas = document.getElementById('myCanvas');
+  var ctx = canvas.getContext('2d');
+  var maxWidth = 500;
+  var lineHeight = 24;
+  var x = (canvas.width - maxWidth) / 2;
+  var y = 50;
+  var a = 'Daniel 2:44: And in the days of these kings shall the God of heaven set up a kingdom, which shall never be destroyed: and the kingdom shall not be left to other people, but it shall break in pieces and consume all these kingdoms, and it shall stand for ever.';
+  var b = "Isaiah 29:14: Therefore, behold, I will proceed to do a marvellous work among this people, even a marvellous work and a wonder: for the wisdom of their wise men shall perish, and the understanding of their prudent men shall be hid.";
+  var d = "Ephesians 1:10: That in the dispensation of the fulness of times he might gather together in one all things in Christ, both which are in heaven, and which are on earth; even in him:";
+  var e = "2 Nephi 25:17: And the Lord will set his hand again the second time to restore his people from their lost and fallen state. Wherefore, he will proceed to do a marvelous work and a wonder among the children of men.";
+  var f = "Doctrine and Covenants 132:40: I am the Lord thy God, and I gave unto thee, my servant Joseph, an appointment, and restore all things. Ask what ye will, and it shall be given unto you according to my word.";
+  var h = "Joseph Smith -- History 1:17: It no sooner appeared than I found myself delivered from the enemy which held me bound. When the light rested upon me I saw two Personages, whose brightness and glory defy all description, standing above me in the air. One of them spake unto me, calling me by name and said, pointing to the other—This is My Beloved Son. Hear Him!";
+  var g = "";
+  var c = [g,a,b,d,e,f,h];
+
+  var c1 = "red";
+  var c2 = "green";
+  var c3 = "orange";
+  var c4 = "blue";
+  var cArray = [c1,c2,c3,c4];
+
+
+  ctx.font = '15pt Calibri';
+  
+  ctx.fillStyle = cArray[n];
+  
+  wrapText(ctx, c[number], x, y, maxWidth, lineHeight);
+};
+
+runScripture();
+
+setInterval(runScripture, 10000);
+  
+    
+  
+   
+
+
+
+
+  
+
+ 
+
+ 
+
+       
+      
+</script>
+
+
+
+</html>
