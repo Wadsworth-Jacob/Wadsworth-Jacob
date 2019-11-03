@@ -201,3 +201,149 @@
       100% {background-color: orange; top:100px; left: 400px;}
   }
    
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: #2196F3;
+    padding: 10px;
+  }
+
+  .grid-container2 {
+    display: grid;
+    grid-template-columns: auto auto;
+    
+  }
+
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+    transition:3s;
+  }
+
+  #red{
+      width:100px;
+      height:30px;
+      background-color:red;
+  }
+
+  #green{
+    width:100px;
+    height:30px;
+    background-color:green;
+}
+
+#yellow{
+    width:100px;
+    height:30px;
+    background-color:yellow;
+}
+
+  #red:hover ~ .grid-container{
+      background-color:red;
+  }
+
+  #green:hover ~ .grid-container{
+    background-color:green;
+}
+
+#yellow:hover ~ .grid-container{
+    background-color:yellow;
+}
+
+ 
+
+ 
+  .one:hover{
+      background-color: green;
+      padding: 50px;
+      border-radius: 50px;
+      transition-duration: 3s;
+
+  }
+  .two:hover{
+    
+    background-color: purple;
+    padding: 3px;
+    border-radius: 100px;
+    transition-duration: 5s;
+    font-size: 100px;
+    color:yellow;
+
+}
+
+  .three:hover{
+    background-color:black;
+    color:orange;
+    height:100px;
+    
+    font-size:85px;
+    transition:2s;
+
+  }
+
+  .four:hover{
+     
+      
+      font-size:200px;
+      background-color:green;
+      color:red;
+      transition:4s;
+  }
+
+  .five:hover{
+      border-radius:200px;
+      transition:3s;
+      height:330px;
+      font-size:100px;
+      color:orange;
+      background-color:blue;
+
+  }
+
+  .six:hover{
+     
+      
+    font-size:200px;
+    background-color:blue;
+    color:white;
+    font-family:arial;
+    border-radius:200px;
+    padding:100;
+    transition:4s;
+
+}
+
+.seven:hover{
+     
+      
+    font-size:24px;
+    background-color:green;
+    color:red;
+    border-radius:15px;
+    transition:4s;
+}
+
+.eight:hover{
+     
+      
+    font-size:500px;
+    background-color:yellow;
+    color:purple;
+    border-radius:79px;
+    border:0px;
+    transition:4s;
+}
+
+
+.nine:hover{
+     
+      
+    font-size:12px;
+    background-color:grey;
+    color:green;
+    border-radius:22px;
+    transition:4s;
+}
