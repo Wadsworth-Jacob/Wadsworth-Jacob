@@ -206,6 +206,7 @@
     grid-template-columns: auto auto auto;
     background-color: #2196F3;
     padding: 10px;
+    width: 600px;
   }
 
   .grid-container2 {
@@ -220,6 +221,7 @@
     padding: 20px;
     font-size: 30px;
     text-align: center;
+    
     transition:3s;
   }
 
@@ -345,5 +347,70 @@
     background-color:grey;
     color:green;
     border-radius:22px;
-    transition:4s;
+    transition: 4s;
+    
 }
+
+#square{
+    background-color: red;
+    height:100px;
+    width:100px;
+}
+
+#x{
+    background-color: green;
+    height:30px;
+    width:200px;
+}
+
+#y{
+    background-color: yellow;
+    height:30px;
+    width:200px;
+}
+
+#z{
+    background-color: blue;
+    height:30px;
+    width:200px;
+}
+
+#square {
+    width: 100px;
+    height: 100px;
+    background: red;
+    position:absolute;
+    left:5px;
+    top:300px;
+    transition: 2s;  
+    
+  }
+  
+  #y:hover ~ #square {
+    transform: rotateY(360deg);
+    background-color:yellow;
+    position:absolute;
+    top:50px;
+    left:500px;
+    transition: 3s;
+  }
+
+  #x:hover ~ #square {
+    transform: rotateX(360deg);
+    background-color:green;
+    position:absolute;
+    left:5px;
+    top:50px;
+    transition: 3s;
+  }
+
+  #z:hover ~ #square {
+    transform: rotateZ(360deg);
+    background-color:blue;
+   
+    position: absolute;
+    left:500px;
+    top:300px;
+    transition: 3s;
+
+  }

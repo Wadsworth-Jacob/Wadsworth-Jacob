@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="Topic1/styles/normal.css">
+<body id='bdy' >
+<h1><i>Topic 11</i></h1>
+<h2><i><u>Using CSS Transitions without a Library</u></i></h2>
+
+ 
+<div id="red">RED</div>
+<div id="green">GREEN</div>
+<div id="yellow">YELLOW</div><br><br>
+    
+
+<div class="grid-container">
+    <div class="grid-item one">1</div>
+    <div class="grid-item two">2</div>
+    <div class="grid-item three">3</div>
+    <div class="grid-item four">4</div>
+    <div class="grid-item five">5</div>
+    <div class="grid-item six">6</div>
+    <div class="grid-item seven">7</div>
+    <div class="grid-item eight">8</div>
+    <div class="grid-item nine">9</div>
+  </div>   
+
+      
+
+</body>
+
+<script>
+
+
+    
+  
+   
+
+
+
+
+  
+
+ 
+
+ 
+
+       
+      
+</script>
+
+
+
+</html>
