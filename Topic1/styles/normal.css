@@ -414,3 +414,94 @@
     transition: 3s;
 
   }
+
+  body {padding:4em; background:#fcfcfc;}
+
+
+
+
+div.orange:hover{animation-play-state: running;}
+div.orange:hover ~ div.yellow{animation-play-state: paused;}
+
+div.orange{width:200px;
+           height:50px;
+           position:absolute;
+           left:600px;
+           background-color:orange;
+           border-radius: 25px;
+           font-size: 30px;
+           color:rgb(1, 1, 14);
+           text-align: center;
+           animation: spin2 10s linear infinite;
+           animation-play-state: paused;}
+
+
+
+@keyframes spin2{
+    50%{transform: rotate(1turn); border-radius:200px; color:white; font-size:18px; background-color:pink;}
+}
+
+div.yellow{
+    background-color:yellow;
+    height:100px;
+    width:100px;
+    position:absolute;
+  
+    left:5px;
+    animation: slide2 15s linear infinite;
+    animation-play-state: running;
+}
+
+div.yellow:hover~div.yes{animation-play-state:paused;}
+
+div.blue{
+    background-color:blue;
+    height:100px;
+    width:100px;
+    position:absolute;
+    
+    left:5px;
+    animation: slide 10s linear infinite;
+    animation-play-state: running;
+    
+}
+
+div.green{
+    background-color: green;
+    height:100px;
+    width:100px;
+    position:absolute;
+    top:300px;
+    left:5px;
+    animation: slide2 10s linear infinite;
+    animation-play-state: running;
+}
+
+div.red{
+    background-color: red;
+    height:100px;
+    width:100px;
+    position:absolute;
+    top:400px;
+    left:5px;
+    animation: slide2 15s linear infinite;
+    animation-play-state: running;
+}
+
+div.blue:hover ~ div.green{animation-play-state:paused;}
+div.green:hover ~ div.red{animation-play-state:paused;}
+div.red:hover ~ div.blue{animation-play-state:paused;}
+
+
+@keyframes slide{
+    50%{left:400px;}
+}
+
+@keyframes slide2 {
+    50% {position: absolute; left: 300px;}
+}
+
+@keyframes{
+    50%{position: absolute; left:300px;}
+}
+
