@@ -1,3 +1,6 @@
+
+
+
 .cdePrgrph {
     width: 800px;
     color: black;
@@ -190,6 +193,7 @@
     position: absolute;
     top: 100px;
     left: 400px;
+    animation-play-state: running;
     
   }
   @keyframes chColors {
@@ -501,7 +505,42 @@ div.red:hover ~ div.blue{animation-play-state:paused;}
     50% {position: absolute; left: 300px;}
 }
 
-@keyframes{
-    50%{position: absolute; left:300px;}
+.blackBox{
+    height:100px;
+    width:100px;
+    background-color:black;
+    transition: 4s;
 }
 
+.redRectangle{
+    height:100px;
+    width:400px;
+    background-color:red;
+    transition: 4s;
+}
+
+.greenCircle{
+    height:100px;
+    width:100px;
+    border-radius:100px;
+    background-color:green;
+    transition: 4s;
+}
+
+.yellowTriangle{
+    width: 0px; 
+    height: 0px; 
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    
+    border-bottom: 200px solid yellow;
+    transition: 7s;
+}
+
+.purpleOval{
+    width: 200px;
+    height: 100px;
+    background: purple;
+    border-radius: 100px / 50px;
+    transition: 5s;
+}

@@ -5,23 +5,63 @@
 <h1><i>Topic 8</i></h1>
 <h2><i><u>CSS Animations and Transitions </u></i></h2>
 
-<div id='round1'>
-    
-    
-</div>
-<div id='round2' class='eye'></div>
-<div id='round3' class='eye'></div>
-<div id='square1'></div>
-<div id='square2'></div>
-<div id='smile'></div>
+
+<button id='masterButton' onclick="trigger()" type='button'>Change to Red Rectangle</button><br><br>
+
+<div id="masterBox" class='blackBox'></div><br><br>
+
+<button id='animButton' onclick='pause()' type='button'>Pause</button><br><br>
+
 <div id='colors'></div>
+
 
 
 </body>
 
 <script>
 
+var buttonHTML = document.getElementById("masterButton");
+var element = document.getElementById("masterBox");
+var animation = document.getElementById("colors");
+var anButton = document.getElementById("animButton");
 
+function trigger(){
+    
+    if (buttonHTML.innerHTML === 'Change to Red Rectangle')
+    {buttonHTML.innerHTML = 'Change to Green Circle';
+     element.classList.remove('blackBox');
+     element.classList.add('redRectangle');
+    } else if (buttonHTML.innerHTML === 'Change to Green Circle')
+    {buttonHTML.innerHTML = 'Change to Yello Triangle';
+     element.classList.remove('redRectangle');
+     element.classList.add('greenCircle');
+    } else if (buttonHTML.innerHTML === 'Change to Yello Triangle') 
+    {buttonHTML.innerHTML = 'Change to Purple Oval';
+     element.classList.remove('greenCircle');
+     element.classList.add('yellowTriangle');
+    } else if 
+    (buttonHTML.innerHTML === 'Change to Purple Oval') 
+    {buttonHTML.innerHTML = 'Change to Black Box';
+     element.classList.remove('yellowTriangle');
+     element.classList.add('purpleOval');
+    } else if (buttonHTML.innerHTML === 'Change to Black Box')
+    {buttonHTML.innerHTML = 'Change to Red Rectangle';
+     element.classList.remove('purpleOval');
+     element.classList.add('blackBox');
+    }
+}
+
+function pause(){
+    if(anButton.innerHTML === 'Pause')
+    {
+        anButton.innerHTML = 'Start';
+        animation.style.animationPlayState = "paused";
+    } else if (anButton.innerHTML === 'Start')
+    {
+        anButton.innerHTML = 'Pause';
+        animation.style.animationPlayState = 'running';
+    }
+}
        
       
 </script>
