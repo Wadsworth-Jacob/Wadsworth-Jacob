@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="Topic1/styles/normal.css">
+<body onload="crtStSlctr()" id="bdy">
+<h1><i>Final</i></h1>
+
+
+<select id="slctStates" onchange='loadInfo()'></select><br><br id='brk'>
+<!--<button id='slctButton' onclick="loadInfo()">View the National Parks</button><br>-->
+
+
+<div class="cdePrgrph" id="searchCount"></div>
+
+<div id="nationalParks"></div>
+<div id="hello"></div>
+
+</body>
+
+<script>
+      var parks = '';
+       var states = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut'
+                    ,'Deleware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas'
+                    ,'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota'
+                    ,'Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey'
+                    ,'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon'
+                    ,'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas'
+                    ,'Utah', 'Vermont', 'Virginia', 'Washington', 'Washington D.C.', 'West Virginia', 'Wisconsin'
+                    ,'Wyoming'];
+       var stateCdes = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS'
+                       ,'KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','HJ','NM','NY'
+                       ,'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','DC','WV'
+                       ,'WI','WY'];
+
+        function crtStSlctr(){
+           
+           //creates the options of states that populate the select box
+            var a = document.getElementById('slctStates');
+            for (i=0; i<51; i++){
+                
+                var option = document.createElement("option");
+                option.text = states[i];
+                option.value = stateCdes[i];
+                a.add(option);
+
+            };
+
+           // localStorage.removeItem("lstPrkData");
+           // localStorage.removeItem("lstStSlctd");
+
+            //Call information for the last park that was selected
+            document.getElementById("nationalParks").innerHTML = localStorage.getItem("lstPrkData");
+            //Call information for the last state that was selected
+            document.getElementById("slctStates").value = localStorage.getItem("lstStSlctd");
+        };
+
+      
+
+            function loadInfo(){
+            var wait = document.getElementById("hello");
+            wait.classList.add("runIt");
+            var cde = document.getElementById("slctStates").value;
+            //set local storage for the state that was last selected
+            localStorage.setItem("lstStSlctd", cde);
+            var parksURL = 'https://developer.nps.gov/api/v1/parks?stateCode=' 
+                          +  cde
+                          + '&fields=images&api_key=DoggIuLI6iLdqIkFcxYslNODaJVXYkoijNfvfLbB';
+          
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", parksURL, true);
+            xhttp.send();
+
+           
+
+            xhttp.onload = function () {
+            parks = JSON.parse(xhttp.response);
+            
+             console.log(parks);
+             var parksString = JSON.stringify(xhttp.response);
+
+           //creates the select box 
+           var slctRmv = document.getElementById("slctPrks2");
+           
+           if (slctRmv != null) {
+               slctRmv.remove();
+           }   
+           var slct = document.createElement("select");
+           
+           //inserts the select box before a break element with the id='brk'
+           var brk1 = document.getElementById("brk");
+           var insertedNode = bdy.insertBefore(slct, brk1);
+
+           //gives the new node the id 'slctStates' to be referenced when creating children of the slct box
+           insertedNode.setAttribute("id","slctPrks2");
+
+          
+
+           
+
+            var finalTxt = '';
+            var nme = '';
+            var b = document.getElementById("slctPrks2");
+            var prkCde = '';
+         
+            for (var i = 0; i < parks.total; i++){
+                
+               
+             
+          if (parks.data[i].images[0] == undefined){
+              var parkPic = '';
+          } else {
+            var parkPic = '<img class="parkPic" src="' + parks.data[i].images[0].url + '" alt = "pic"><br><br>'; 
+          };
+          if (parks.data[i].directionsInfo == ""){var directions = 'No diretions included for this park.'
+          } else {
+            var directions = parks.data[i].directionsInfo;
+
+            
+
+          };
+
+        
+
+         finalTxt += '<p class="cdePrgrph"><b><u><a href="' + parks.data[i].url + '">'+ parks.data[i].fullName + '</a></u></b><br><br>'
+                   
+                   + '<b>Description: </b>' + parks.data[i].description + '<br><br>'
+                   + '<b>Directions: </b>' + directions + '<br><br></p>'
+                   + parkPic;
+
+         nme += parks.data[i].fullName + '#$%';
+         var nmeArr = nme.split('#$%');
+         console.log(nmeArr);
+         prkCde += parks.data[i].parkCode + '#$%';
+         var prkCdeArr = prkCde.split('#$%');
+        
+            var option2 = document.createElement("option");
+                option2.text = nmeArr[i];
+                option2.value = i;
+                b.add(option2);  
+        
+                wait.classList.remove("runIt");
+        };
+
+        document.getElementById("slctPrks2").addEventListener("change", getPrksValue);
+ 
+       
+    
+       
+        //var nmeArrayFnl = [ + nmeArray + ];
+       // document.getElementById('nationalParks').innerHTML = nmeArrayFnl[0];
+
+        //session storage count of searches performed during this session
+
+      /*  if (sessionStorage.clickcount) {
+         sessionStorage.clickcount = Number(sessionStorage.clickcount) + 1;
+         } else {
+         sessionStorage.clickcount = 1;
+         }
+         document.getElementById("searchCount").innerHTML = "You have performed " +
+         sessionStorage.clickcount + " search(es) in this session.";*/
+
+      
+         if (parks.data[0].images[0] == undefined){
+              var parkPic4 = '';
+          } else {
+          for (var  m = 0; m < parks.data[0].images.length; m++){  
+             parkPic4 += '<img class="parkPic" src="' + parks.data[0].images[m].url + '" alt = "pic"><br><br>'; 
+            //parkPic3 += parks.data[slctPrksVal].images[n].url;
+            };
+          };
+
+          if (parks.data[0].directionsInfo == ""){var directions2 = 'No diretions included for this park.'
+          } else {
+            var directions2 = parks.data[0].directionsInfo;
+          };
+
+     var finalTxt2 = '<p class="cdePrgrph"><b><u><a href="' + parks.data[0].url + '">'+ parks.data[0].fullName + '</a></u></b><br><br>'
+        + '<b>Description: </b>' + parks.data[0].description + '<br><br>'
+                   + '<b>Directions: </b>' + directions2 + '<br><br></p>'
+                   + parkPic4.replace('undefined','');   
+
+
+        localStorage.setItem("lstPrkData", finalTxt2);
+        document.getElementById("nationalParks").innerHTML = localStorage.getItem("lstPrkData");
+    };
+    
+
+    };
+    function getPrksValue(){
+        var slctPrksVal = document.getElementById('slctPrks2').value;
+
+        var finalTxt3 = '';
+
+          if (parks.data[slctPrksVal].images[0] == undefined){
+              var parkPic3 = '';
+          } else {
+           
+            for (var  n = 0; n < parks.data[slctPrksVal].images.length; n++){  
+             parkPic3 += '<img class="parkPic" src="' + parks.data[slctPrksVal].images[n].url + '" alt = "pic"><br><br>'; 
+            //parkPic3 += parks.data[slctPrksVal].images[n].url;
+            };
+          };
+          if (parks.data[slctPrksVal].directionsInfo == ""){var directions = 'No diretions included for this park.'
+          } else {
+            var directions = parks.data[slctPrksVal].directionsInfo;
+
+            
+
+          };
+
+        
+
+         finalTxt3 = '<p class="cdePrgrph"><b><u><a href="' + parks.data[slctPrksVal].url + '">'+ parks.data[slctPrksVal].fullName + '</a></u></b><br><br>'
+                   
+                   + '<b>Description: </b>' + parks.data[slctPrksVal].description + '<br><br>'
+                   + '<b>Directions: </b>' + directions + '<br><br></p>'
+                   + parkPic3.replace('undefined','');
+
+        localStorage.setItem("lstPrkData", finalTxt3);
+        document.getElementById("nationalParks").innerHTML = localStorage.getItem("lstPrkData");
+       
+        
+
+    };
+
+
+
+
+   
+
+
+//https://developer.nps.gov/api/v1/parks?parkCode=acad&api_key=DoggIuLI6iLdqIkFcxYslNODaJVXYkoijNfvfLbB
+
+//DoggIuLI6iLdqIkFcxYslNODaJVXYkoijNfvfLbB
+</script>
+
+
+</html>

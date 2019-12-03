@@ -544,3 +544,21 @@ div.red:hover ~ div.blue{animation-play-state:paused;}
     border-radius: 100px / 50px;
     transition: 5s;
 }
+
+.runIt{
+    width:200px;
+           height:50px;
+           position:fixed;
+           top:300px;
+           left:600px;
+           background-color:orange;
+           border-radius: 25px;
+           font-size: 30px;
+           color:rgb(1, 1, 14);
+           text-align: center;
+           animation: spin3 10s linear infinite;
+}
+
+@keyframes spin3{
+    50%{transform: rotate(1turn); border-radius:200px; color:white; font-size:18px; background-color:pink;}
+}
