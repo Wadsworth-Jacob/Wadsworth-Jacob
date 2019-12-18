@@ -2,10 +2,16 @@
 <html>
 <link rel="stylesheet" href="Topic1/styles/normal.css">
 <body onload="crtStSlctr()" id="bdy">
-<h1><i>Final</i></h1>
+<h1><i>National Parks</i></h1>
+<h1 id='slctStates'>Hello</h1>
 
-
-<select id="slctStates" onchange='loadInfo()'></select><br><br id='brk'>
+<h4 id='description'>Click on one of the states below and then select the park that you would like to visit from the 
+    dropdown list provided.
+</h4>
+<!--<select id="slctStates" onchange='loadInfo()'></select><br>-->
+<br id='brk'>
+<div id="divStates"></div>
+<table id="tabStates"></table>
 <!--<button id='slctButton' onclick="loadInfo()">View the National Parks</button><br>-->
 
 
@@ -31,18 +37,49 @@
                        ,'NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','DC','WV'
                        ,'WI','WY'];
 
+
+
         function crtStSlctr(){
            
            //creates the options of states that populate the select box
-            var a = document.getElementById('slctStates');
-            for (i=0; i<51; i++){
-                
-                var option = document.createElement("option");
-                option.text = states[i];
-                option.value = stateCdes[i];
-                a.add(option);
+        
+            var tab = document.getElementById('tabStates');
+             
+            for (x=10; x>-1; x--) {
+              
+              var row = tab.insertRow(0);
+              //alert(i);
+            for (n = 0; n<5 ; n++){
+                   
+                     var y = x*5;
+                     var z = y+n;
+                     var cell1 = row.insertCell(n);
+                     if (states[z] == undefined){
+                         cell1.innerHTML = '' ;
+                     } else {
+                     cell1.innerHTML = states[z];
+                     cell1.value = stateCdes[z];
+                     cell1.className = ('stateClass');
+                     cell1.addEventListener("mousedown", function(){
+                         loadInfo(this)
+                     
+                     });
+                    };
+                  };
+            }
 
-            };
+           
+
+
+          
+
+           
+
+           
+
+          
+
+        
 
            // localStorage.removeItem("lstPrkData");
            // localStorage.removeItem("lstStSlctd");
@@ -50,17 +87,43 @@
             //Call information for the last park that was selected
             document.getElementById("nationalParks").innerHTML = localStorage.getItem("lstPrkData");
             //Call information for the last state that was selected
-            document.getElementById("slctStates").value = localStorage.getItem("lstStSlctd");
+
+            document.getElementById("slctStates").innerHTML = localStorage.getItem("lstStSlctd");
+
+            var a = localStorage.getItem('lstStateCde');
+            var b = stateCdes.indexOf(a);
+                  
+                  var stateNum = document.getElementsByClassName('stateClass');
+                  for (l=0; l<stateNum.length; l++){
+                      if(l==b){
+                          stateNum[l].classList.add('state2');
+                      }
+                  }
+            
+          if (b != null){
+           loadInfo(stateNum[b]);
+
+          };
+            
+
+
+
         };
 
       
 
-            function loadInfo(){
+            function loadInfo(e){
+            var state = document.getElementsByTagName('td');
+            for(i = 0; i < state.length; i++){
+                state[i].classList.remove('state2');
+            };
+            e.classList.add('state2');
             var wait = document.getElementById("hello");
             wait.classList.add("runIt");
-            var cde = document.getElementById("slctStates").value;
+            //var cde = document.getElementById("slctStates").value;
             //set local storage for the state that was last selected
-            localStorage.setItem("lstStSlctd", cde);
+            var cde = e.value;
+            localStorage.setItem("lstStSlctd", e.innerHTML);
             var parksURL = 'https://developer.nps.gov/api/v1/parks?stateCode=' 
                           +  cde
                           + '&fields=images&api_key=DoggIuLI6iLdqIkFcxYslNODaJVXYkoijNfvfLbB';
@@ -74,9 +137,10 @@
             xhttp.onload = function () {
             parks = JSON.parse(xhttp.response);
             
+            
              console.log(parks);
              var parksString = JSON.stringify(xhttp.response);
-
+             localStorage.setItem('parksData',parksString);
            //creates the select box 
            var slctRmv = document.getElementById("slctPrks2");
            
@@ -91,6 +155,9 @@
 
            //gives the new node the id 'slctStates' to be referenced when creating children of the slct box
            insertedNode.setAttribute("id","slctPrks2");
+           localStorage.setItem("lstStSlctd", e.innerHTML);
+           document.getElementById("slctStates").innerHTML = localStorage.getItem('lstStSlctd');
+           localStorage.setItem("lstStateCde", e.value);
 
           
 
@@ -128,6 +195,7 @@
 
          nme += parks.data[i].fullName + '#$%';
          var nmeArr = nme.split('#$%');
+         localStorage.setItem('nmeArr',nmeArr);
          console.log(nmeArr);
          prkCde += parks.data[i].parkCode + '#$%';
          var prkCdeArr = prkCde.split('#$%');
@@ -217,13 +285,16 @@
 
         localStorage.setItem("lstPrkData", finalTxt3);
         document.getElementById("nationalParks").innerHTML = localStorage.getItem("lstPrkData");
+        document.getElementById('slctStates').innerHTML = localStorage.getItem("lstStSlctd");
        
         
 
     };
 
 
-
+function test11(e){
+  alert(e.value);
+};
 
    
 

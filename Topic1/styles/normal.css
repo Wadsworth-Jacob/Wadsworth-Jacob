@@ -562,3 +562,29 @@ div.red:hover ~ div.blue{animation-play-state:paused;}
 @keyframes spin3{
     50%{transform: rotate(1turn); border-radius:200px; color:white; font-size:18px; background-color:pink;}
 }
+
+.stateClass{
+    background-color: yellow;
+    color: purple;
+    font-size: 18px;
+}
+
+.stateClass:hover{
+    background-color: purple;
+    color: yellow;
+    font-size:24px;
+}
+
+.state2{
+    background-color: green;
+    color: orange;
+    font-size:24px;
+}
+
+#slctPrks2{
+    font-size: 32px;
+}
+
+#slctStates{
+    display: none;
+}
