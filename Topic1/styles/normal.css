@@ -567,12 +567,14 @@ div.red:hover ~ div.blue{animation-play-state:paused;}
     background-color: yellow;
     color: purple;
     font-size: 18px;
+    transition: 1s;
 }
 
 .stateClass:hover{
     background-color: purple;
     color: yellow;
     font-size:24px;
+    transition: 2s;
 }
 
 .state2{

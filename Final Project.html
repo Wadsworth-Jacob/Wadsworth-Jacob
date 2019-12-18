@@ -42,6 +42,7 @@
         function crtStSlctr(){
            
            //creates the options of states that populate the select box
+           document.getElementById('nationalParks').innerHTML = '';
         
             var tab = document.getElementById('tabStates');
              
@@ -85,10 +86,10 @@
            // localStorage.removeItem("lstStSlctd");
 
             //Call information for the last park that was selected
-            document.getElementById("nationalParks").innerHTML = localStorage.getItem("lstPrkData");
+           // document.getElementById("nationalParks").innerHTML = localStorage.getItem("lstPrkData");
             //Call information for the last state that was selected
 
-            document.getElementById("slctStates").innerHTML = localStorage.getItem("lstStSlctd");
+           // document.getElementById("slctStates").innerHTML = localStorage.getItem("lstStSlctd");
 
             var a = localStorage.getItem('lstStateCde');
             var b = stateCdes.indexOf(a);
@@ -99,14 +100,17 @@
                           stateNum[l].classList.add('state2');
                       }
                   }
-            
+
+
+
           if (b != null){
-           loadInfo(stateNum[b]);
+           loadInfo(stateNum[b]);} else {
+          
 
           };
             
 
-
+ 
 
         };
 
@@ -292,9 +296,8 @@
     };
 
 
-function test11(e){
-  alert(e.value);
-};
+
+
 
    
 
