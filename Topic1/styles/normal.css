@@ -585,8 +585,9 @@ div.red:hover ~ div.blue{animation-play-state:paused;}
 
 #slctPrks2{
     font-size: 32px;
+    width: 300px;
 }
 
-#slctStates{
+/*#slctStates{
     display: none;
-}
+}*/

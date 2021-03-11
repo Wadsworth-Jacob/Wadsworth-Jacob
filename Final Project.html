@@ -103,11 +103,11 @@
 
 
 
-          if (b != null){
+        /*  if (b != null){
            loadInfo(stateNum[b]);} else {
           
 
-          };
+          };*/
             
 
  
@@ -130,8 +130,8 @@
             localStorage.setItem("lstStSlctd", e.innerHTML);
             var parksURL = 'https://developer.nps.gov/api/v1/parks?stateCode=' 
                           +  cde
-                          + '&fields=images&api_key=DoggIuLI6iLdqIkFcxYslNODaJVXYkoijNfvfLbB';
-          
+                          + '&fields=images&api_key=gzQbpRR0VuT3yuvTl5f6r7qztfFcWlVZjFM8K5ki';
+                        
             var xhttp = new XMLHttpRequest();
             xhttp.open("GET", parksURL, true);
             xhttp.send();
@@ -305,6 +305,9 @@
 //https://developer.nps.gov/api/v1/parks?parkCode=acad&api_key=DoggIuLI6iLdqIkFcxYslNODaJVXYkoijNfvfLbB
 
 //DoggIuLI6iLdqIkFcxYslNODaJVXYkoijNfvfLbB
+
+//https://developer.nps.gov/api/v1/parks?parkCode=acad&api_key=gzQbpRR0VuT3yuvTl5f6r7qztfFcWlVZjFM8K5ki
+
 </script>
 
 
